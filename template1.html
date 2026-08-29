@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>style | The Ultimate Makeover · Unisex Salon</title>
+    <meta name="description" content="style - The Ultimate Makeover. A premium unisex salon offering precision haircuts, styling, beard grooming, colour, and spa therapy.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "brand": {
+                            "DEFAULT": "#E4002B",
+                            "hover": "#C4001F",
+                            "light": "#FCE4E7",
+                            "border": "rgba(228, 0, 43, 0.4)"
+                        },
+                        "dark": "#111111",
+                        "header-bg": "#000000"
+                    },
+                    fontFamily: {
+                        "heading": ["Montserrat", "sans-serif"],
+                        "body": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            color: #1F2937;
+        }
+
+        /* Clean subtle card transition */
+        .photo-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .photo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Brand button */
+        .btn-brand {
+            background-color: #E4002B;
+            color: #FFFFFF;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .btn-brand:hover {
+            background-color: #C4001F;
+            color: #FFFFFF;
+        }
+
+        /* "style" wordmark logo (recreated from the brand photo) */
+        .wordmark {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            text-transform: lowercase;
+        }
+
+        /* ==============================
+           HERO BACKGROUND SLIDESHOW
+           Crossfade + slow Ken Burns zoom across multiple images
+           ============================== */
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.45) contrast(1.1);
+            opacity: 0;
+            will-change: opacity, transform;
+            animation: heroFade 28s infinite;
+        }
+        .hero-slide:nth-child(1) { animation-delay: 0s; }
+        .hero-slide:nth-child(2) { animation-delay: 7s; }
+        .hero-slide:nth-child(3) { animation-delay: 14s; }
+        .hero-slide:nth-child(4) { animation-delay: 21s; }
+
+        @keyframes heroFade {
+            0%   { opacity: 0; transform: scale(1); }
+            4%   { opacity: 1; }
+            25%  { opacity: 1; }
+            30%  { opacity: 0; transform: scale(1.12); }
+            100% { opacity: 0; transform: scale(1.12); }
+        }
+
+        /* Soft entrance for the hero text */
+        .hero-reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            animation: heroReveal 1s ease-out 0.2s forwards;
+        }
+        @keyframes heroReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Respect users who prefer no motion */
+        @media (prefers-reduced-motion: reduce) {
+            .hero-slide { animation: none; }
+            .hero-slide:nth-child(1) { opacity: 1; }
+            .hero-reveal { animation: none; opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 antialiased selection:bg-brand selection:text-white">
+
+    <!-- ==========================================
+         TOP HEADER (Black bar, "style" unisex branding)
+         ========================================== -->
+    <header class="sticky top-0 z-50 bg-black text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+            
+            <!-- Brand Logo: "style" wordmark with tagline directly under the name -->
+            <a href="#" class="inline-flex flex-col leading-none">
+                <span class="wordmark text-4xl md:text-5xl text-brand">style</span>
+                <span class="font-heading text-[8px] md:text-[9px] uppercase tracking-wide text-gray-300 font-semibold mt-1 w-full flex justify-between">
+                    <span>The Ultimate</span><span>Makeover Unisex</span>
+                </span>
+            </a>
+
+            <!-- Navigation -->
+            <nav class="hidden md:flex items-center space-x-8 font-heading text-xs uppercase tracking-widest font-semibold">
+                <a href="#hero" class="text-brand border-b-2 border-brand pb-1">HOME</a>
+                <a href="#services" class="text-gray-300 hover:text-brand transition-colors">SERVICES</a>
+                <a href="#styles" class="text-gray-300 hover:text-brand transition-colors">STYLES</a>
+                <a href="#vogue" class="text-gray-300 hover:text-brand transition-colors">GALLERY</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="hidden sm:flex items-center space-x-4">
+                <a href="#hero" class="border border-brand text-brand hover:bg-brand/10 font-heading text-xs uppercase tracking-wider py-2.5 px-4 transition-colors flex items-center gap-1.5">
+                    <span>Salon Finder</span>
+                    <span class="material-symbols-outlined text-sm text-brand">location_on</span>
+                </a>
+
+                <button onclick="openBookingModal()" class="btn-brand font-heading text-xs uppercase tracking-wider py-2.5 px-5 shadow transition-all">
+                    Book Appointment
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-white hover:text-brand p-2" aria-label="Toggle navigation">
+                <span class="material-symbols-outlined text-3xl">menu</span>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#111111] border-t border-gray-800 px-6 py-5 space-y-4">
+            <nav class="flex flex-col space-y-3 font-heading text-sm uppercase tracking-wider">
+                <a href="#hero" class="text-brand py-1">HOME</a>
+                <a href="#services" class="text-gray-300 hover:text-brand py-1">SERVICES</a>
+                <a href="#styles" class="text-gray-300 hover:text-brand py-1">STYLES</a>
+                <a href="#vogue" class="text-gray-300 hover:text-brand py-1">GALLERY</a>
+            </nav>
+            <div class="pt-3 border-t border-gray-800 flex flex-col gap-2">
+                <a href="#hero" class="text-center border border-brand text-brand py-2.5 font-heading text-xs uppercase">
+                    Salon Finder
+                </a>
+                <button onclick="openBookingModal()" class="w-full btn-brand py-2.5 font-heading text-xs uppercase">
+                    Book Appointment
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ==========================================
+             HERO (FRONT): FULL-WIDTH BACKGROUND INTERIOR PHOTO
+             Moved to the very front as requested. The salon
+             interior photo sits behind the "style" name + KL banner.
+             ========================================== -->
+        <section id="hero" class="relative bg-black text-white min-h-[560px] md:min-h-[85vh] flex items-center overflow-hidden">
+            <!-- Background Slideshow: multiple interior photos crossfading with a Ken Burns zoom -->
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1512690459411-b9245aed614b?q=80&w=1800&auto=format&fit=crop')"></div>
+                <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1800&auto=format&fit=crop')"></div>
+                <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1800&auto=format&fit=crop')"></div>
+                <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=1800&auto=format&fit=crop')"></div>
+                <!-- Left-to-right dark gradient so the text stays readable -->
+                <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-black/20"></div>
+            </div>
+
+            <!-- Hero Content (left-aligned like the reference) -->
+            <div class="relative z-10 max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-12 py-24">
+                <div class="max-w-2xl hero-reveal">
+                    <!-- Logo: "style" name with tagline directly under it -->
+                    <div class="inline-flex flex-col leading-none mb-8">
+                        <span class="wordmark text-7xl sm:text-8xl md:text-9xl text-brand">style</span>
+                        <span class="font-heading text-[11px] sm:text-sm uppercase tracking-wide text-gray-100 font-semibold mt-2 w-full flex justify-between">
+                            <span>The Ultimate</span><span>Makeover Unisex</span>
+                        </span>
+                    </div>
+
+                    <p class="font-heading font-light text-2xl sm:text-3xl md:text-4xl text-gray-100 tracking-wide leading-tight mb-6">
+                        NOW OPEN IN<br class="hidden sm:block">
+                        <span class="font-bold text-white">KUALA LUMPUR</span>, MALAYSIA
+                    </p>
+
+                    <p class="text-gray-300 text-sm sm:text-base max-w-lg mb-9 leading-relaxed">
+                        A premium unisex salon for men and women. Precision haircuts, expert styling,
+                        beard grooming, colour, and spa therapy under one roof.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="openBookingModal('Kuala Lumpur Flagship')" class="btn-brand font-heading text-xs uppercase tracking-widest px-8 py-4 shadow">
+                            Book Your Makeover
+                        </button>
+                        <a href="tel:+60321488888" class="bg-white/10 hover:bg-white/20 backdrop-blur text-white border border-white/40 hover:border-brand font-heading text-xs uppercase tracking-widest px-6 py-4 transition-colors flex items-center gap-2">
+                            <span class="material-symbols-outlined text-base">call</span>
+                            <span>+60 3 2148 8888</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION: "STYLE IN VOGUE" - PHOTO GRID (AFTER THE HERO)
+             These are the "other photos" that follow the background hero.
+             ========================================== -->
+        <section id="vogue" class="bg-white py-10 md:py-14 border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- 6-Tile Grid (3 on top, 3 on bottom) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    
+                    <!-- Tile 1 -->
+                    <div class="relative group overflow-hidden bg-gray-100 aspect-[16/11] photo-card rounded-sm shadow-sm cursor-pointer" onclick="openBookingModal('Natural Curly Fade')">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=900&auto=format&fit=crop" 
+                             alt="Textured hair curls" 
+                             class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90 flex items-end p-4">
+                            <div>
+                                <span class="text-brand text-[11px] font-heading font-semibold uppercase tracking-wider">Style 01</span>
+                                <h3 class="text-white font-heading font-bold text-base">Textured Curls & Low Taper</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tile 2: STYLE IN VOGUE Banner -->
+                    <div class="relative bg-[#1A1A1A] text-white aspect-[16/11] rounded-sm p-6 flex flex-col items-center justify-center text-center shadow-md">
+                        <span class="text-brand text-xs font-heading font-bold tracking-[0.25em] uppercase mb-2">
+                            THE MAKEOVER COLLECTION
+                        </span>
+                        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl tracking-wider text-white mb-2 leading-tight">
+                            STYLE<br><span class="text-white">IN VOGUE</span>
+                        </h2>
+                        <div class="w-12 h-0.5 bg-brand my-3"></div>
+                        <p class="text-xs text-gray-300 max-w-xs mb-5">
+                            Handcrafted precision cuts, colour, and grooming tailored for men and women.
+                        </p>
+                        <a href="#styles" class="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white font-heading font-bold text-xs uppercase tracking-widest px-6 py-3 transition-colors shadow">
+                            <span>View Collection</span>
+                            <span class="material-symbols-outlined text-sm font-bold">content_cut</span>
+                        </a>
+                    </div>
+
+                    <!-- Tile 3 -->
+                    <div class="relative group overflow-hidden bg-gray-100 aspect-[16/11] photo-card rounded-sm shadow-sm cursor-pointer" onclick="openBookingModal('Executive Pompadour')">
+                        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=900&auto=format&fit=crop" 
+                             alt="Brushed back pompadour" 
+                             class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90 flex items-end p-4">
+                            <div>
+                                <span class="text-brand text-[11px] font-heading font-semibold uppercase tracking-wider">Style 02</span>
+                                <h3 class="text-white font-heading font-bold text-base">Executive Brushed Pompadour</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tile 4 -->
+                    <div class="relative group overflow-hidden bg-gray-100 aspect-[16/11] photo-card rounded-sm shadow-sm cursor-pointer" onclick="openBookingModal('Textured French Crop')">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=900&auto=format&fit=crop" 
+                             alt="Sharp short hair fade" 
+                             class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90 flex items-end p-4">
+                            <div>
+                                <span class="text-brand text-[11px] font-heading font-semibold uppercase tracking-wider">Style 03</span>
+                                <h3 class="text-white font-heading font-bold text-base">Textured French Crop & Fade</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tile 5 -->
+                    <div class="relative group overflow-hidden bg-gray-100 aspect-[16/11] photo-card rounded-sm shadow-sm cursor-pointer" onclick="openBookingModal('Beard Architecture & Skin Fade')">
+                        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=900&auto=format&fit=crop" 
+                             alt="Beard sculpture and razor fade" 
+                             class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90 flex items-end p-4">
+                            <div>
+                                <span class="text-brand text-[11px] font-heading font-semibold uppercase tracking-wider">Style 04</span>
+                                <h3 class="text-white font-heading font-bold text-base">Full Sculpted Beard & Taper</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tile 6 -->
+                    <div class="relative group overflow-hidden bg-gray-100 aspect-[16/11] photo-card rounded-sm shadow-sm cursor-pointer" onclick="openBookingModal('Signature Scissor Flow')">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=900&auto=format&fit=crop" 
+                             alt="Medium wave haircut styling" 
+                             class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=900&auto=format&fit=crop';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90 flex items-end p-4">
+                            <div>
+                                <span class="text-brand text-[11px] font-heading font-semibold uppercase tracking-wider">Style 05</span>
+                                <h3 class="text-white font-heading font-bold text-base">Signature Scissor Flow</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION: "OUR SERVICES"
+             ========================================== -->
+        <section id="services" class="bg-white py-16 sm:py-24 border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center mb-14">
+                    <span class="text-brand font-heading text-xs font-bold tracking-[0.25em] uppercase block mb-2">
+                        UNISEX GROOMING
+                    </span>
+                    <h2 class="font-heading text-3xl sm:text-5xl font-light tracking-tight text-black">
+                        OUR <span class="font-bold">SERVICES</span>
+                    </h2>
+                    <div class="w-12 h-1 bg-brand mx-auto mt-4 mb-3"></div>
+                    <p class="text-gray-600 text-sm max-w-lg mx-auto">
+                        Haircuts and styling, colour, beard grooming, and spa therapy for men and women.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Service 1 -->
+                    <div class="bg-gray-50 border border-gray-200 p-6 rounded-sm photo-card flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded bg-black text-brand flex items-center justify-center mb-5">
+                                <span class="material-symbols-outlined text-2xl">content_cut</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-lg text-black mb-2">Haircut & Styling</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-6">
+                                Consultation, precision scissor work, wash, blow-dry, and premium finish for all hair types.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-200 flex justify-between items-center">
+                            <span class="font-heading font-bold text-black text-base">₹599</span>
+                            <button onclick="openBookingModal('Haircut & Styling')" class="text-xs font-heading font-bold text-black hover:text-brand uppercase flex items-center gap-1">
+                                <span>Book Now</span>
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="bg-gray-50 border border-gray-200 p-6 rounded-sm photo-card flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded bg-black text-brand flex items-center justify-center mb-5">
+                                <span class="material-symbols-outlined text-2xl">face</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-lg text-black mb-2">Beard & Shave</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-6">
+                                Hot steam towel, straight razor lining, length gradation, and organic beard oil treatment.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-200 flex justify-between items-center">
+                            <span class="font-heading font-bold text-black text-base">₹299</span>
+                            <button onclick="openBookingModal('Beard & Shave')" class="text-xs font-heading font-bold text-black hover:text-brand uppercase flex items-center gap-1">
+                                <span>Book Now</span>
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="bg-gray-50 border border-gray-200 p-6 rounded-sm photo-card flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded bg-black text-brand flex items-center justify-center mb-5">
+                                <span class="material-symbols-outlined text-2xl">spa</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-lg text-black mb-2">Hair Spa & Scalp Detox</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-6">
+                                Deep clarifying scrub, revitalizing acupressure head massage, and nourishing serum treatment.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-200 flex justify-between items-center">
+                            <span class="font-heading font-bold text-black text-base">₹999</span>
+                            <button onclick="openBookingModal('Hair Spa & Scalp Detox')" class="text-xs font-heading font-bold text-black hover:text-brand uppercase flex items-center gap-1">
+                                <span>Book Now</span>
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="bg-gray-50 border border-gray-200 p-6 rounded-sm photo-card flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded bg-black text-brand flex items-center justify-center mb-5">
+                                <span class="material-symbols-outlined text-2xl">palette</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-lg text-black mb-2">Colour & Highlights</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-6">
+                                Global colour, balayage, highlights, and grey blending using ammonia-free premium formulas.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-200 flex justify-between items-center">
+                            <span class="font-heading font-bold text-black text-base">₹1,999</span>
+                            <button onclick="openBookingModal('Colour & Highlights')" class="text-xs font-heading font-bold text-black hover:text-brand uppercase flex items-center gap-1">
+                                <span>Book Now</span>
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Full Makeover Package Strip -->
+                <div class="mt-10 bg-[#1A1A1A] text-white p-6 sm:p-8 rounded-sm flex flex-col md:flex-row justify-between items-center gap-6 shadow">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-brand/20 flex items-center justify-center text-brand shrink-0">
+                            <span class="material-symbols-outlined text-2xl">star</span>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-bold text-lg text-white">The Ultimate Makeover Package</h4>
+                            <p class="text-xs text-gray-300 mt-0.5">Haircut & Styling + Colour + Hair Spa & Scalp Massage (₹3,499)</p>
+                        </div>
+                    </div>
+                    <button onclick="openBookingModal('The Ultimate Makeover Package')" class="btn-brand font-heading text-xs uppercase tracking-wider py-3 px-6 shrink-0">
+                        Book Full Makeover
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION: STYLE LOOKBOOK
+             ========================================== -->
+        <section id="styles" class="bg-[#F9FAFB] py-16 sm:py-24 border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center mb-12">
+                    <span class="text-brand font-heading text-xs font-bold tracking-[0.25em] uppercase block mb-2">
+                        EXPLORE STYLES
+                    </span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold text-black">
+                        THE STYLE LOOKBOOK
+                    </h2>
+                    <div class="w-12 h-1 bg-brand mx-auto mt-3 mb-2"></div>
+                    <p class="text-gray-600 text-sm max-w-md mx-auto">
+                        Popular looks crafted by our master stylists. Choose a style for your next appointment.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Card 1 -->
+                    <div class="bg-white border border-gray-200 rounded-sm overflow-hidden photo-card">
+                        <div class="aspect-[4/5] overflow-hidden bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Low skin fade haircut" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[11px] font-heading font-semibold text-brand uppercase tracking-wider">Fade Architecture</span>
+                            <h3 class="font-heading font-bold text-lg text-black mt-1">Low Drop Skin Fade</h3>
+                            <p class="text-xs text-gray-600 mt-1 mb-4">Clean curvature drop behind ears with crisp line-up.</p>
+                            <button onclick="openBookingModal('Low Drop Skin Fade')" class="w-full py-2.5 bg-gray-100 hover:bg-brand hover:text-white text-black font-heading text-xs font-semibold uppercase tracking-wider transition-colors">
+                                Request This Style
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white border border-gray-200 rounded-sm overflow-hidden photo-card">
+                        <div class="aspect-[4/5] overflow-hidden bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Sculpted beard grooming" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[11px] font-heading font-semibold text-brand uppercase tracking-wider">Royal Beard</span>
+                            <h3 class="font-heading font-bold text-lg text-black mt-1">Sculpted Beard & Razor Taper</h3>
+                            <p class="text-xs text-gray-600 mt-1 mb-4">Sharp cheekbone edge, defined jawline, and hot oil conditioning.</p>
+                            <button onclick="openBookingModal('Sculpted Beard & Razor Taper')" class="w-full py-2.5 bg-gray-100 hover:bg-brand hover:text-white text-black font-heading text-xs font-semibold uppercase tracking-wider transition-colors">
+                                Request This Style
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-white border border-gray-200 rounded-sm overflow-hidden photo-card">
+                        <div class="aspect-[4/5] overflow-hidden bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Executive side part haircut" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[11px] font-heading font-semibold text-brand uppercase tracking-wider">Classic Executive</span>
+                            <h3 class="font-heading font-bold text-lg text-black mt-1">The Manhattan Side-Part</h3>
+                            <p class="text-xs text-gray-600 mt-1 mb-4">Timeless scissor cut styled with natural matte luster.</p>
+                            <button onclick="openBookingModal('The Manhattan Side-Part')" class="w-full py-2.5 bg-gray-100 hover:bg-brand hover:text-white text-black font-heading text-xs font-semibold uppercase tracking-wider transition-colors">
+                                Request This Style
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="bg-white border border-gray-200 rounded-sm overflow-hidden photo-card">
+                        <div class="aspect-[4/5] overflow-hidden bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=800&auto=format&fit=crop" 
+                                 alt="High temple taper haircut" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[11px] font-heading font-semibold text-brand uppercase tracking-wider">Precision Fade</span>
+                            <h3 class="font-heading font-bold text-lg text-black mt-1">High & Tight Temple Taper</h3>
+                            <p class="text-xs text-gray-600 mt-1 mb-4">Textured crown length with razor-honed clean perimeter.</p>
+                            <button onclick="openBookingModal('High & Tight Temple Taper')" class="w-full py-2.5 bg-gray-100 hover:bg-brand hover:text-white text-black font-heading text-xs font-semibold uppercase tracking-wider transition-colors">
+                                Request This Style
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="bg-white border border-gray-200 rounded-sm overflow-hidden photo-card">
+                        <div class="aspect-[4/5] overflow-hidden bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Women's balayage colour style" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[11px] font-heading font-semibold text-brand uppercase tracking-wider">Colour & Balayage</span>
+                            <h3 class="font-heading font-bold text-lg text-black mt-1">Sun-Kissed Balayage</h3>
+                            <p class="text-xs text-gray-600 mt-1 mb-4">Hand-painted dimensional colour with a soft, natural grow-out.</p>
+                            <button onclick="openBookingModal('Sun-Kissed Balayage')" class="w-full py-2.5 bg-gray-100 hover:bg-brand hover:text-white text-black font-heading text-xs font-semibold uppercase tracking-wider transition-colors">
+                                Request This Style
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="bg-white border border-gray-200 rounded-sm overflow-hidden photo-card">
+                        <div class="aspect-[4/5] overflow-hidden bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Women's blow-dry styling" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[11px] font-heading font-semibold text-brand uppercase tracking-wider">Blow-Dry & Waves</span>
+                            <h3 class="font-heading font-bold text-lg text-black mt-1">Glamour Blow-Dry Waves</h3>
+                            <p class="text-xs text-gray-600 mt-1 mb-4">Volume-rich bouncy waves with a glossy, long-lasting finish.</p>
+                            <button onclick="openBookingModal('Glamour Blow-Dry Waves')" class="w-full py-2.5 bg-gray-100 hover:bg-brand hover:text-white text-black font-heading text-xs font-semibold uppercase tracking-wider transition-colors">
+                                Request This Style
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION: MASTER STYLISTS
+             ========================================== -->
+        <section class="bg-white py-16 sm:py-24 border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center mb-14">
+                    <span class="text-brand font-heading text-xs font-bold tracking-[0.25em] uppercase block mb-2">
+                        OUR TEAM
+                    </span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold text-black">
+                        MASTER STYLISTS
+                    </h2>
+                    <div class="w-12 h-1 bg-brand mx-auto mt-3 mb-2"></div>
+                    <p class="text-gray-600 text-sm max-w-md mx-auto">
+                        Experienced professionals dedicated to modern styling, colour, and grooming for everyone.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Stylist 1 -->
+                    <div class="bg-gray-50 border border-gray-200 rounded-sm overflow-hidden photo-card">
+                        <div class="aspect-[4/4] overflow-hidden bg-gray-200">
+                            <img src="https://images.unsplash.com/photo-1534778356534-d3d45b6df1da?q=80&w=900&auto=format&fit=crop" 
+                                 alt="Julian Vance Master Stylist" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-heading font-bold text-xl text-black">Julian Vance</h3>
+                            <p class="text-xs font-heading uppercase text-brand font-semibold tracking-wider mt-1 mb-3">Creative Director • 14 Yrs Exp</p>
+                            <p class="text-xs text-gray-600 mb-5 leading-relaxed">
+                                Specializes in tailored bone-structure haircutting, scissor architecture, and editorial styling.
+                            </p>
+                            <button onclick="openBookingModal('Julian Vance')" class="w-full py-2.5 border border-black hover:bg-black hover:text-white text-black font-heading text-xs font-semibold uppercase tracking-wider transition-colors">
+                                Book With Julian
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Stylist 2 -->
+                    <div class="bg-gray-50 border border-gray-200 rounded-sm overflow-hidden photo-card">
+                        <div class="aspect-[4/4] overflow-hidden bg-gray-200">
+                            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=900&auto=format&fit=crop" 
+                                 alt="Elena Rossi Colour Specialist" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-heading font-bold text-xl text-black">Elena Rossi</h3>
+                            <p class="text-xs font-heading uppercase text-brand font-semibold tracking-wider mt-1 mb-3">Master Colour Specialist • 11 Yrs Exp</p>
+                            <p class="text-xs text-gray-600 mb-5 leading-relaxed">
+                                Expert in balayage, dimensional highlights, glossing, and creative colour correction.
+                            </p>
+                            <button onclick="openBookingModal('Elena Rossi')" class="w-full py-2.5 border border-black hover:bg-black hover:text-white text-black font-heading text-xs font-semibold uppercase tracking-wider transition-colors">
+                                Book With Elena
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Stylist 3 -->
+                    <div class="bg-gray-50 border border-gray-200 rounded-sm overflow-hidden photo-card">
+                        <div class="aspect-[4/4] overflow-hidden bg-gray-200">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=900&auto=format&fit=crop" 
+                                 alt="David Ross Beard Specialist" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-heading font-bold text-xl text-black">David Ross</h3>
+                            <p class="text-xs font-heading uppercase text-brand font-semibold tracking-wider mt-1 mb-3">Beard & Spa Artisan • 12 Yrs Exp</p>
+                            <p class="text-xs text-gray-600 mb-5 leading-relaxed">
+                                Renowned for straight razor hot towel shaves, full beard sculpting, and restorative scalp therapy.
+                            </p>
+                            <button onclick="openBookingModal('David Ross')" class="w-full py-2.5 border border-black hover:bg-black hover:text-white text-black font-heading text-xs font-semibold uppercase tracking-wider transition-colors">
+                                Book With David
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer class="bg-black text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+                
+                <!-- Col 1 -->
+                <div>
+                    <span class="wordmark text-4xl text-brand block leading-none">style</span>
+                    <span class="font-heading text-[9px] uppercase tracking-wide text-gray-300 font-semibold flex justify-between w-full max-w-[180px] mt-1 mb-4">
+                        <span>The Ultimate</span><span>Makeover Unisex</span>
+                    </span>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        A premium unisex salon for haircutting, styling, colour, beard grooming, and luxury spa services.
+                    </p>
+                </div>
+
+                <!-- Col 2 -->
+                <div>
+                    <h4 class="font-heading font-bold text-xs uppercase tracking-widest text-white mb-3">Quick Links</h4>
+                    <ul class="space-y-2 text-xs text-gray-400 font-heading">
+                        <li><a href="#hero" class="hover:text-brand transition-colors">Home</a></li>
+                        <li><a href="#services" class="hover:text-brand transition-colors">Services</a></li>
+                        <li><a href="#styles" class="hover:text-brand transition-colors">Style Lookbook</a></li>
+                        <li><a href="#vogue" class="hover:text-brand transition-colors">Gallery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div>
+                    <h4 class="font-heading font-bold text-xs uppercase tracking-widest text-white mb-3">Opening Hours</h4>
+                    <ul class="space-y-1 text-xs text-gray-400">
+                        <li>Monday – Friday: 10:00 AM – 9:00 PM</li>
+                        <li>Saturday – Sunday: 09:00 AM – 9:00 PM</li>
+                        <li class="text-brand font-medium mt-2">Appointments & Walk-ins Welcome</li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 -->
+                <div>
+                    <h4 class="font-heading font-bold text-xs uppercase tracking-widest text-white mb-3">Contact</h4>
+                    <p class="text-xs text-gray-400 mb-2">Pavilion Kuala Lumpur, Level 4</p>
+                    <p class="text-xs text-brand font-bold mb-4">+60 3 2148 8888</p>
+                    <button onclick="openBookingModal()" class="w-full btn-brand py-2 font-heading text-xs uppercase tracking-wider">
+                        Book Appointment
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="pt-6 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500">
+                <p>© 2025 style — The Ultimate Makeover. All Rights Reserved.</p>
+                <div class="flex space-x-6 mt-3 sm:mt-0 font-heading text-[11px] uppercase">
+                    <a href="#" class="hover:text-brand">Privacy Policy</a>
+                    <a href="#" class="hover:text-brand">Terms of Service</a>
+                    <a href="#hero" class="hover:text-brand">Salon Finder</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         APPOINTMENT BOOKING MODAL
+         ========================================== -->
+    <div id="booking-modal" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center p-4">
+        <div class="bg-white text-gray-900 w-full max-w-md p-6 sm:p-8 rounded-sm shadow-2xl relative border-t-4 border-brand">
+            
+            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-gray-400 hover:text-black">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+
+            <div class="mb-5">
+                <span class="text-brand font-heading text-[10px] uppercase tracking-widest font-bold block">APPOINTMENTS</span>
+                <h3 class="font-heading font-bold text-2xl text-black">Book Your Makeover Session</h3>
+                <p class="text-xs text-gray-500 mt-1">Select your service and preferred time.</p>
+            </div>
+
+            <form id="booking-form" onsubmit="handleBookingSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-heading font-semibold uppercase text-gray-700 mb-1">Service</label>
+                    <select id="modal-service" class="w-full bg-gray-50 border border-gray-300 text-gray-800 text-xs px-3 py-2.5 rounded-sm focus:border-black focus:outline-none">
+                        <option value="Haircut & Styling">Haircut & Styling (₹599)</option>
+                        <option value="Beard & Shave">Beard & Shave (₹299)</option>
+                        <option value="Hair Spa & Scalp Detox">Hair Spa & Scalp Detox (₹999)</option>
+                        <option value="Colour & Highlights">Colour & Highlights (₹1,999)</option>
+                        <option value="The Ultimate Makeover Package">The Ultimate Makeover Package (₹3,499)</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-heading font-semibold uppercase text-gray-700 mb-1">Preferred Date</label>
+                        <input type="date" required class="w-full bg-gray-50 border border-gray-300 text-gray-800 text-xs px-3 py-2.5 rounded-sm focus:border-black focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-heading font-semibold uppercase text-gray-700 mb-1">Time</label>
+                        <select class="w-full bg-gray-50 border border-gray-300 text-gray-800 text-xs px-3 py-2.5 rounded-sm focus:border-black focus:outline-none">
+                            <option>10:00 AM</option>
+                            <option>11:30 AM</option>
+                            <option>02:00 PM</option>
+                            <option>04:30 PM</option>
+                            <option>06:30 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-heading font-semibold uppercase text-gray-700 mb-1">Full Name</label>
+                        <input type="text" placeholder="Full name" required class="w-full bg-gray-50 border border-gray-300 text-gray-800 text-xs px-3 py-2.5 rounded-sm focus:border-black focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-heading font-semibold uppercase text-gray-700 mb-1">Phone</label>
+                        <input type="tel" placeholder="+60 12 345 6789" required class="w-full bg-gray-50 border border-gray-300 text-gray-800 text-xs px-3 py-2.5 rounded-sm focus:border-black focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full btn-brand py-3 font-heading font-bold text-xs uppercase tracking-wider shadow">
+                        Confirm Appointment
+                    </button>
+                </div>
+            </form>
+
+            <div id="booking-success" class="hidden text-center py-6">
+                <span class="material-symbols-outlined text-4xl text-green-600 mb-2">check_circle</span>
+                <h4 class="font-heading font-bold text-xl text-black">Booking Confirmed!</h4>
+                <p class="text-xs text-gray-600 mt-1 mb-5">
+                    We look forward to seeing you at style. A confirmation SMS has been sent.
+                </p>
+                <button onclick="closeBookingModal()" class="btn-brand px-6 py-2 text-xs font-heading uppercase">
+                    Done
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Global safety net: if any image fails to load, swap in a reliable fallback
+        // so a broken-image icon is never shown.
+        const FALLBACK_IMG = 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=900&auto=format&fit=crop';
+        document.addEventListener('error', (e) => {
+            const el = e.target;
+            if (el && el.tagName === 'IMG' && el.src !== FALLBACK_IMG) {
+                el.src = FALLBACK_IMG;
+            }
+        }, true);
+
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileBtn && mobileMenu) {
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Booking Modal functions
+        function openBookingModal(serviceName) {
+            const modal = document.getElementById('booking-modal');
+            const form = document.getElementById('booking-form');
+            const success = document.getElementById('booking-success');
+            const serviceSelect = document.getElementById('modal-service');
+
+            if (serviceName && serviceSelect) {
+                for (let opt of serviceSelect.options) {
+                    if (opt.text.toLowerCase().includes(serviceName.toLowerCase()) || 
+                        opt.value.toLowerCase().includes(serviceName.toLowerCase())) {
+                        opt.selected = true;
+                        break;
+                    }
+                }
+            }
+
+            form.classList.remove('hidden');
+            success.classList.add('hidden');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBookingModal() {
+            const modal = document.getElementById('booking-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function handleBookingSubmit(e) {
+            e.preventDefault();
+            document.getElementById('booking-form').classList.add('hidden');
+            document.getElementById('booking-success').classList.remove('hidden');
+        }
+
+        // Close on ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeBookingModal();
+            }
+        });
+    </script>
+
+</body>
+</html>
